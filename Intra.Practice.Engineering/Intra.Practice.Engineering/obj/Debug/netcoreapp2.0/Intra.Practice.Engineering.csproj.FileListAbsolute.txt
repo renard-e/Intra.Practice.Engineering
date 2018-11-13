@@ -1,0 +1,11 @@
+C:\Users\greg7\Documents\Intra.Practice.Engineering\Intra.Practice.Engineering\Intra.Practice.Engineering\bin\Debug\netcoreapp2.0\Intra.Practice.Engineering.deps.json
+C:\Users\greg7\Documents\Intra.Practice.Engineering\Intra.Practice.Engineering\Intra.Practice.Engineering\bin\Debug\netcoreapp2.0\Intra.Practice.Engineering.runtimeconfig.json
+C:\Users\greg7\Documents\Intra.Practice.Engineering\Intra.Practice.Engineering\Intra.Practice.Engineering\bin\Debug\netcoreapp2.0\Intra.Practice.Engineering.runtimeconfig.dev.json
+C:\Users\greg7\Documents\Intra.Practice.Engineering\Intra.Practice.Engineering\Intra.Practice.Engineering\bin\Debug\netcoreapp2.0\Intra.Practice.Engineering.dll
+C:\Users\greg7\Documents\Intra.Practice.Engineering\Intra.Practice.Engineering\Intra.Practice.Engineering\bin\Debug\netcoreapp2.0\Intra.Practice.Engineering.pdb
+C:\Users\greg7\Documents\Intra.Practice.Engineering\Intra.Practice.Engineering\Intra.Practice.Engineering\obj\Debug\netcoreapp2.0\Intra.Practice.Engineering.csprojResolveAssemblyReference.cache
+C:\Users\greg7\Documents\Intra.Practice.Engineering\Intra.Practice.Engineering\Intra.Practice.Engineering\obj\Debug\netcoreapp2.0\Intra.Practice.Engineering.csproj.CoreCompileInputs.cache
+C:\Users\greg7\Documents\Intra.Practice.Engineering\Intra.Practice.Engineering\Intra.Practice.Engineering\obj\Debug\netcoreapp2.0\Intra.Practice.Engineering.AssemblyInfoInputs.cache
+C:\Users\greg7\Documents\Intra.Practice.Engineering\Intra.Practice.Engineering\Intra.Practice.Engineering\obj\Debug\netcoreapp2.0\Intra.Practice.Engineering.AssemblyInfo.cs
+C:\Users\greg7\Documents\Intra.Practice.Engineering\Intra.Practice.Engineering\Intra.Practice.Engineering\obj\Debug\netcoreapp2.0\Intra.Practice.Engineering.dll
+C:\Users\greg7\Documents\Intra.Practice.Engineering\Intra.Practice.Engineering\Intra.Practice.Engineering\obj\Debug\netcoreapp2.0\Intra.Practice.Engineering.pdb
