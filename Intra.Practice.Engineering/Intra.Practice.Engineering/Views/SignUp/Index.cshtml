@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "SignUp";
+}
+
+<section id="inner-description" class="section inner-description">
+    <div class="container">
+        <div class="col-md-10 col-md-offset-1 text-center">
+            <p>Please enter your email and password to register yourself</p>
+            <!--       <\!--contact form start-\-> -->
+            <div class="col-md-6 col-md-offset-3 conForm">
+                <!-- <div id="message"></div> -->
+                <!-- <form method="post" action="register" name="cform" id="cform"> -->
+                <form method="post" action="SignUp/SignUpSubmit">
+                    <input name="email" id="email" type="email" class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 noMarr" placeholder="Email Address...">
+                    <input name="passwd" id="passwd" type="password" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" placeholder="Your password...">
+                    <input type="submit" id="submit" name="send" value="SignUp">
+                    <!-- <div id="simple-msg"></div> -->
+                </form>
+            </div>
+            <!--       <\!--contact form end-\-> -->
+        </div>
+    </div>
+</section>
