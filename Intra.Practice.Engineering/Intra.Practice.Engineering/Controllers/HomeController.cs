@@ -10,8 +10,12 @@ namespace Intra.Practice.Engineering.Controllers
 {
     public class HomeController : Controller
     {
+        private static ClientServer client = new ClientServer();
+
         public IActionResult Index()
         {
+            client.setEmail("MERDE"); // ici ca boucle inf 
+            TempData["client"] = client;
             return View();
         }
 
