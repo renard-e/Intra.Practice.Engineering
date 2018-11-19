@@ -15,7 +15,7 @@ namespace Intra.Practice.Engineering.Controllers
 
         public IActionResult SignInSubmit()
         {
-            System.Diagnostics.Debug.WriteLine("-------------------------------------\nemail : " + HttpContext.Request.Form["email"] + "\npassword : " + HttpContext.Request.Form["passwd"] + "\nconfirm password : " + HttpContext.Request.Form["confirmpasswd"] + "\n-------------------------------------");
+            System.Diagnostics.Debug.WriteLine("-------------------------------------\nemail : " + HttpContext.Request.Form["email"] + "\npassword : " + HttpContext.Request.Form["passwd"] + "\n-------------------------------------");
             return View("../Home/Index");
         }
     }

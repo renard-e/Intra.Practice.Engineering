@@ -14,12 +14,13 @@
                 <label for="exampleInputPassword1" style="color: white">Password</label>
                 <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Password">
             </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1" style="color: white">Confirm Password</label>
-                <input type="password" class="form-control" id="confirmpasswd" name="confirmpasswd" placeholder="Confirm Password">
-            </div>
             <br>
             <button type="submit" class="btn btn-warning btn-block" id="submit" name="send">Submit</button>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <a asp-area="" asp-controller="SignUp" asp-action="Index" style="color: #f0ad4e">You don't have an account ? Sign Up !</a>
+                </label>
+            </div>
         </form>
     </div>
 </body>
