@@ -15,8 +15,7 @@ namespace Intra.Practice.Engineering.Controllers
 
         public IActionResult SignUpSubmit()
         {
-            System.Diagnostics.Debug.WriteLine("-------------------------------------\n" + HttpContext.Request.Form["email"] + "\n-------------------------------------");
-            System.Diagnostics.Debug.WriteLine("EMAIL SESSION = " + ((ClientServer)TempData["client"]).getEmail());
+            System.Diagnostics.Debug.WriteLine("-------------------------------------\nemail : " + HttpContext.Request.Form["email"] + "\npassword : " + HttpContext.Request.Form["passwd"] + "\n-------------------------------------");
             return View("../Home/Index");
         }
     }

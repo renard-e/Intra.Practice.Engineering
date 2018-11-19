@@ -14,15 +14,8 @@ namespace Intra.Practice.Engineering.Controllers
 
         public IActionResult Index()
         {
-            client.setEmail("MERDE"); // ici ca boucle inf 
-            TempData["client"] = client;
-            return View();
-        }
-
-        public IActionResult SignIn()
-        {
-            ViewData["Message"] = "Sign In Page";
-
+            //client.setEmail("MERDE"); // ici ca boucle inf 
+            //TempData["client"] = client;
             return View();
         }
 
