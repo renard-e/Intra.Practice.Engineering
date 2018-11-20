@@ -5,7 +5,7 @@
 <body class="bodyColor">
     <div class="divSpaceForm">
         <img src="~/images/Intra.jpg" class="center-block">
-        <form method="post" action="SignIn/SignInSubmit">
+        <form method="post" action="SignIn/SignInSubmit" name="formSignIn" id="formSignIn" onsubmit="requiredSignIn()">
             <div class="form-group">
                 <label for="exampleInputEmail1" style="color: white">Email address</label>
                 <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">

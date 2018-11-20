@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Intra.Practice.Engineering.Controllers
 {
@@ -15,8 +17,9 @@ namespace Intra.Practice.Engineering.Controllers
 
         public IActionResult SignInSubmit()
         {
-            System.Diagnostics.Debug.WriteLine("-------------------------------------\nemail : " + HttpContext.Request.Form["email"] + "\npassword : " + HttpContext.Request.Form["passwd"] + "\n-------------------------------------");
-            return View("../Home/Index");
+            if (String.IsNullOrEmpty(HttpContext.Request.Form["email"].ToString()) || String.IsNullOrEmpty(HttpContext.Request.Form["passwd"].ToString()))
+                return RedirectToAction("Index", "SignIn");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

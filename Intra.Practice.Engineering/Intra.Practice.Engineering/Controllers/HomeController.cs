@@ -5,17 +5,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Intra.Practice.Engineering.Models;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Intra.Practice.Engineering.Controllers
 {
     public class HomeController : Controller
     {
-        private static ClientServer client = new ClientServer();
-
         public IActionResult Index()
         {
-            //client.setEmail("MERDE"); // ici ca boucle inf 
-            //TempData["client"] = client;
+            JObject obj = new JObject();
+
+            obj.Add("email", "");
+            obj.Add("group", "undefined");
+            TempData["client"] = obj.ToString();
             return View();
         }
 
