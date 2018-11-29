@@ -19,6 +19,7 @@ namespace Intra.Practice.Engineering.Controllers
             obj.Add("email", "");
             obj.Add("group", "undefined");
             TempData["client"] = obj.ToString();
+            TempData["message"] = "";
             return View();
         }
 

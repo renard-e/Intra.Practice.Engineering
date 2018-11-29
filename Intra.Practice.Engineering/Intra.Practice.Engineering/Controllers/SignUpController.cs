@@ -18,14 +18,30 @@ namespace Intra.Practice.Engineering.Controllers
             System.Diagnostics.Debug.WriteLine("RECUPERER = " + obj["email"]);
             System.Diagnostics.Debug.WriteLine("RECUPERER = " + obj["group"]);
 
+            TempData.Keep();
             return View();
         }
 
         public IActionResult SignUpSubmit()
         {
             if (String.IsNullOrEmpty(HttpContext.Request.Form["email"].ToString()) || String.IsNullOrEmpty(HttpContext.Request.Form["passwd"].ToString()) && String.IsNullOrEmpty(HttpContext.Request.Form["confirmpasswd"].ToString()))
+            {
+                TempData["message"] = "Please fill all the blanks";
                 return RedirectToAction("Index", "SignUp");
-            return RedirectToAction("Index", "Home");
+            }
+            if (HttpContext.Request.Form["passwd"].ToString() != HttpContext.Request.Form["confirmpasswd"].ToString())
+            {
+                TempData["message"] = "Password and Confirm Password must be the same";
+                return RedirectToAction("Index", "SignUp");
+            }
+            if (DbUsers.SignUpFunc(HttpContext.Request.Form["email"].ToString(), HttpContext.Request.Form["passwd"].ToString(), HttpContext.Request.Form["role"].ToString()) == false)
+            {
+                TempData["message"] = "User already exist";
+                return RedirectToAction("Index", "SignUp");
+            }
+            TempData["message"] = "";
+            TempData.Keep();
+            return RedirectToAction("Index", "SignIn");
         }
     }
 }

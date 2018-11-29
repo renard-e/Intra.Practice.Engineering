@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "bcffe823e1d4569d5d180b233f1cf39174110003"
+    "signature": "b83f66addb4c410ae076c48dc6144357d051644b"
   },
   "compilationOptions": {
     "defines": [
@@ -24,6 +24,7 @@
       "Intra.Practice.Engineering/1.0.0": {
         "dependencies": {
           "Cogito.Web.UI": "3.0.0",
+          "EntityFramework": "6.2.0",
           "Microsoft.AspNet.Mvc": "3.0.50813.1",
           "Microsoft.AspNetCore.All": "2.0.3",
           "Microsoft.NETCore.App": "2.0.0",
@@ -50,6 +51,16 @@
         },
         "compile": {
           "lib/net451/Cogito.Web.UI.dll": {}
+        }
+      },
+      "EntityFramework/6.2.0": {
+        "runtime": {
+          "lib/net45/EntityFramework.SqlServer.dll": {},
+          "lib/net45/EntityFramework.dll": {}
+        },
+        "compile": {
+          "lib/net45/EntityFramework.SqlServer.dll": {},
+          "lib/net45/EntityFramework.dll": {}
         }
       },
       "jQuery/3.0.0": {},
@@ -4248,6 +4259,13 @@
       "sha512": "sha512-eDdQzIGRw4zUEHbKx6lCYWpPHh4k6yOe5shl+kcPgk303FeidzVh7fO7BVDwFh2/ujUAj7ctoyOXyWDfl1mKSg==",
       "path": "cogito.web.ui/3.0.0",
       "hashPath": "cogito.web.ui.3.0.0.nupkg.sha512"
+    },
+    "EntityFramework/6.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7u/Xw6dnODaoB8opNC/Uz8nT/LKOxsvJhObYU+m0CErCXdOsyTC1MZwqQoam8lMehLTxBoMBewvWoOQUBaUKsQ==",
+      "path": "entityframework/6.2.0",
+      "hashPath": "entityframework.6.2.0.nupkg.sha512"
     },
     "jQuery/3.0.0": {
       "type": "package",

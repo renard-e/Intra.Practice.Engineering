@@ -4,8 +4,9 @@
 }
 <body class="bodyColor">
     <div class="divSpaceForm">
+        <h1 style="font-family:verdana; color: red" align="center"> @TempData["message"] </h1><br><br>
         <img src="~/images/Intra.jpg" class="center-block">
-        <form name="formSignUp" id="formSignUp" method="post" action="SignUp/SignUpSubmit" onsubmit="requiredSignUp()">
+        <form name="formSignUp" id="formSignUp" method="post" action="SignUp/SignUpSubmit">
             <div class="form-group">
                 <label for="exampleInputEmail1" style="color: white">Email address</label>
                 <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
