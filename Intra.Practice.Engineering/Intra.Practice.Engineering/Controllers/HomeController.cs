@@ -14,11 +14,19 @@ namespace Intra.Practice.Engineering.Controllers
     {
         public IActionResult Index()
         {
-            JObject obj = new JObject();
+            try
+            {
+                Debug.WriteLine(TempData.Peek("client").ToString());
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("ERROR : " + ex.ToString());
+                JObject obj = new JObject();
 
-            obj.Add("email", "");
-            obj.Add("group", "undefined");
-            TempData["client"] = obj.ToString();
+                obj.Add("email", "");
+                obj.Add("group", "undefined");
+                TempData["client"] = obj.ToString();
+            }
             TempData["message"] = "";
             return View();
         }

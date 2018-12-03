@@ -3,5 +3,78 @@
     ViewData["Title"] = "Employee";
 }
 
-<h2>Index @ViewData["Title"]</h2>
+<script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
 
+<body class="yui3-skin-sam bodyColor">
+    <div class="divSpaceForm">
+        <img src="~/images/Intra.jpg" class="center-block">
+        <div id="banner" style="overflow: hidden; display: flex; justify-content:space-around;">
+            <div id="calendar1" class="yui3-skin-sam yui3-g">
+                <div id="leftcolumn" class="yui3-u">
+                    <h1 style="font-family:verdana; color: white;" align="center">Start :</h1>
+                    <div id="mycalendar"></div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                YUI().use('calendar', 'datatype-date', 'cssbutton', function (Y) {
+
+                    var calendar = new Y.Calendar({
+                        contentBox: "#mycalendar",
+                        width: '340px',
+                        date: new Date()
+                    }).render();
+
+                    var dtdate = Y.DataType.Date;
+
+                    calendar.on("selectionChange", function (ev) {
+                        var newDate = ev.newSelection[0];
+
+                        document.getElementById("selecteddatestart").value = dtdate.format(newDate);
+                        Y.one("#selecteddatestart").setHTML(dtdate.format(newDate));
+                    });
+                });
+            </script>
+            <div id="calendar2" class="yui3-skin-sam yui3-g">
+                <div id="leftcolumn" class="yui3-u">
+                    <h1 style="font-family:verdana; color: white;" align="center">End :</h1>
+                    <div id="mycalendar2"></div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                YUI().use('calendar', 'datatype-date', 'cssbutton', function (Y) {
+
+                    var calendar = new Y.Calendar({
+                        contentBox: "#mycalendar2",
+                        width: '340px',
+                        date: new Date()
+                    }).render();
+
+                    var dtdate = Y.DataType.Date;
+
+                    calendar.on("selectionChange", function (ev) {
+                        var newDate = ev.newSelection[0];
+
+                        document.getElementById("selecteddateend").value = dtdate.format(newDate);
+                        Y.one("#selecteddateend").setHTML(dtdate.format(newDate));
+                    });
+                });
+            </script>
+        </div>
+        <form method="post" action="Employee/PushCalendar" name="formEmployeeCalendar" id="formEmployeeCalendar">
+            <div class="form-group">
+                <label for="inputCalendar1" style="color: white">Start</label>
+                <input type="text" class="form-control" id="selecteddatestart" name="selecteddatestart" value="" hidden>
+            </div>
+            <div class="form-group">
+                <label for="imputCalendar2" style="color: white">End</label>
+                <input type="text" class="form-control" id="selecteddateend" name="selecteddateend" value=""hidden>
+            </div>
+            <div class="form-group">
+                    <label for="imputReason" style="color: white">Reason :</label>
+                    <input type="text" class="form-control" id="reason" name="reason">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-warning btn-block" id="submit" name="send">Submit</button>
+          </form>
+        </div>
+    </body>

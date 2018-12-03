@@ -12,13 +12,13 @@ namespace Intra.Practice.Engineering.Controllers
     {
         public IActionResult Index()
         {
-            System.Diagnostics.Debug.WriteLine("---------------TEMP DATA : \n" + TempData["client"] + "\n--------------------------------");
-            JObject obj = JObject.Parse(TempData["client"].ToString());
+            JObject obj = JObject.Parse(TempData.Peek("client").ToString());
 
-            System.Diagnostics.Debug.WriteLine("RECUPERER = " + obj["email"]);
-            System.Diagnostics.Debug.WriteLine("RECUPERER = " + obj["group"]);
-
-            TempData.Keep();
+            System.Diagnostics.Debug.WriteLine("RECUPERER = \n" + obj.ToString());
+            if (obj["group"].ToString() == "Employee")
+                return RedirectToAction("Index", "Employee");
+            if (obj["group"].ToString() == "Manager")
+                return RedirectToAction("Index", "Manager");
             return View();
         }
 
@@ -34,13 +34,12 @@ namespace Intra.Practice.Engineering.Controllers
                 TempData["message"] = "Password and Confirm Password must be the same";
                 return RedirectToAction("Index", "SignUp");
             }
-            if (DbUsers.SignUpFunc(HttpContext.Request.Form["email"].ToString(), HttpContext.Request.Form["passwd"].ToString(), HttpContext.Request.Form["role"].ToString()) == false)
+            if (DbUsers.SignUpFunc(HttpContext.Request.Form["email"].ToString(), HttpContext.Request.Form["passwd"].ToString(), HttpContext.Request.Form["group"].ToString()) == false)
             {
                 TempData["message"] = "User already exist";
                 return RedirectToAction("Index", "SignUp");
             }
             TempData["message"] = "";
-            TempData.Keep();
             return RedirectToAction("Index", "SignIn");
         }
     }

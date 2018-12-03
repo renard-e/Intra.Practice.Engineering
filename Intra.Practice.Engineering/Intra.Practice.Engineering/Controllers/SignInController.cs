@@ -12,6 +12,13 @@ namespace Intra.Practice.Engineering.Controllers
     {
         public IActionResult Index()
         {
+            JObject obj = JObject.Parse(TempData.Peek("client").ToString());
+
+            System.Diagnostics.Debug.WriteLine("RECUPERER SIGNIN = \n" + obj.ToString());
+            if (obj["group"].ToString() == "Employee")
+                return RedirectToAction("Index", "Employee");
+            if (obj["group"].ToString() == "Manager")
+                return RedirectToAction("Index", "Manager");
             return View();
         }
 
@@ -30,9 +37,23 @@ namespace Intra.Practice.Engineering.Controllers
                 return RedirectToAction("Index", "SignIn");
             }
             if (group == "Employee")
+            {
+                JObject obj = JObject.Parse(TempData.Peek("client").ToString());
+
+                obj["group"] = "Employee";
+                obj["email"] = HttpContext.Request.Form["email"].ToString();
+                TempData["client"] = obj.ToString();
                 return RedirectToAction("Index", "Employee");
+            }
             if (group == "Manager")
+            {
+                JObject obj = JObject.Parse(TempData.Peek("client").ToString());
+
+                obj["group"] = "Employee";
+                obj["email"] = HttpContext.Request.Form["email"].ToString();
+                TempData["client"] = obj.ToString();
                 return RedirectToAction("Index", "Manager");
+            }
             return RedirectToAction("Index", "Home");
         }
     }
