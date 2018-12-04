@@ -31,8 +31,28 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="SignIn" asp-action="Index">Sign In</a></li>
-                    <li><a asp-area="" asp-controller="SignUp" asp-action="Index">Sign Up</a></li>
+                    @if (String.IsNullOrEmpty((Newtonsoft.Json.Linq.JObject.Parse(TempData.Peek("client").ToString())["email"]).ToString()))
+    {
+                <li><a asp-area="" asp-controller="SignIn" asp-action="Index">Sign In</a></li>
+}
+                    @if (String.IsNullOrEmpty((Newtonsoft.Json.Linq.JObject.Parse(TempData.Peek("client").ToString())["email"]).ToString()))
+    {
+                <li><a asp-area="" asp-controller="SignUp" asp-action="Index">Sign Up</a></li>
+
+}
+                    @if ((Newtonsoft.Json.Linq.JObject.Parse(TempData.Peek("client").ToString())["group"]).ToString() == "Employee")
+    {
+                <li><a asp-area="" asp-controller="Employee" asp-action="Index">Employee</a></li>
+                <li><a asp-area="" asp-controller="Employee" asp-action="RequirementsList">Requirements List</a></li>
+}
+                    @if ((Newtonsoft.Json.Linq.JObject.Parse(TempData.Peek("client").ToString())["group"]).ToString() == "Manager")
+    {
+                <li><a asp-area="" asp-controller="Manager" asp-action="Index">Manager</a></li>
+}
+                    @if (!String.IsNullOrEmpty((Newtonsoft.Json.Linq.JObject.Parse(TempData.Peek("client").ToString())["email"]).ToString()))
+    {
+                <li><a asp-area="" asp-controller="Home" asp-action="Logout">Logout</a></li>
+}
                 </ul>
             </div>
         </div>

@@ -71,5 +71,101 @@ namespace Intra.Practice.Engineering
             }
             return ("undefined");
         }
+
+        public static Boolean PostDayOff(String dayStart, String dayEnd, String Reason, String UserEmail)
+        {
+            String folder = @"c:\dbIntra/";
+            String dbName = "ListDayOff";
+
+            if (!File.Exists(folder + UserEmail + dbName + ".json"))
+            {
+                FileStream file = File.Create(folder + UserEmail + dbName + ".json");
+
+                file.Close();
+                try
+                {
+                    StreamWriter srW = new StreamWriter(folder + UserEmail + dbName + ".json");
+
+                    JObject obj = new JObject();
+                    JArray array = new JArray();
+
+                    obj.Add("list", array);
+                    srW.WriteLine(obj.ToString());
+                    srW.Close();
+                    System.Diagnostics.Debug.WriteLine("SUCCEES : write data in file");
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("--------------------------------\n" + "Error : can't init StreamWriter : " + ex.ToString() + "\n----------------------------------------");
+                    return (false);
+                }
+            }
+            if (File.Exists(folder + UserEmail + dbName + ".json"))
+            {
+                JObject objFinal = new JObject();
+                try
+                {
+                    StreamReader sr = new StreamReader(folder + UserEmail + dbName + ".json");
+                    objFinal = JObject.Parse(sr.ReadToEnd());
+                    JArray array = JArray.Parse(objFinal["list"].ToString());
+                    JObject newObjList = new JObject();
+
+                    newObjList.Add("Start", dayStart);
+                    newObjList.Add("End", dayEnd);
+                    newObjList.Add("Reason", Reason);
+                    newObjList.Add("State", "In progress");
+                    newObjList.Add("Id", (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds.ToString());
+                    array.Add(newObjList);
+                    objFinal["list"] = array.ToString();
+                    sr.Close();
+                    try
+                    {
+                        StreamWriter srWS = new StreamWriter(folder + UserEmail + dbName + ".json");
+
+                        srWS.Write(objFinal.ToString());
+                        srWS.Close();
+                        System.Diagnostics.Debug.WriteLine("SUCCEES : write data in file");
+                        System.Diagnostics.Debug.WriteLine(objFinal.ToString());
+                        return (true);
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine("--------------------------------\n" + "Error : can't init StreamWriter : " + ex.ToString() + "\n----------------------------------------");
+                        return (false);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Error : can't init StreamReader exeception : \n" + ex.ToString());
+                    return (false);
+                }
+            }
+            return (false);
+        }
+
+        public static JArray getRequirementsListFromUser(String userEmail)
+        {
+            String folder = @"c:\dbIntra/";
+            String dbName = "ListDayOff";
+
+            if (File.Exists(folder + userEmail + dbName + ".json"))
+            {
+                JObject objFinal = new JObject();
+                try
+                {
+                    StreamReader sr = new StreamReader(folder + userEmail + dbName + ".json");
+                    JArray array = JArray.Parse(JObject.Parse(sr.ReadToEnd())["list"].ToString());
+
+                    sr.Close();
+                    return (array);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Error : can't init StreamReader exeception : \n" + ex.ToString());
+                    return (new JArray());
+                }
+            }
+            return (new JArray());
+        }
     }
 }

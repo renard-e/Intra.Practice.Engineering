@@ -22,10 +22,26 @@ namespace Intra.Practice.Engineering.Controllers
 
         public IActionResult PushCalendar()
         {
-            System.Diagnostics.Debug.WriteLine("SELECTEDDATE 1 = " + HttpContext.Request.Form["selecteddatestart"].ToString());
-            System.Diagnostics.Debug.WriteLine("SELECTEDDATE 2 = " + HttpContext.Request.Form["selecteddateend"].ToString());
-            System.Diagnostics.Debug.WriteLine("REASON = " + HttpContext.Request.Form["reason"].ToString());
+            if (String.IsNullOrEmpty(HttpContext.Request.Form["selecteddatestart"].ToString()) || String.IsNullOrEmpty(HttpContext.Request.Form["selecteddateend"].ToString()) || String.IsNullOrEmpty(HttpContext.Request.Form["reason"].ToString()))
+            {
+                TempData["message"] = "Please fill all the blanks";
+                return RedirectToAction("Index", "Employee");
+            }
+            if ((DbUsers.PostDayOff(HttpContext.Request.Form["selecteddatestart"].ToString(), HttpContext.Request.Form["selecteddateend"].ToString(), HttpContext.Request.Form["reason"].ToString(), (JObject.Parse(TempData.Peek("client").ToString())["email"]).ToString())) == false)
+                System.Diagnostics.Debug.WriteLine("ERROR : can't post the day off");
             return RedirectToAction("Index", "Employee");
+        }
+
+        public IActionResult RequirementsList()
+        {
+            JObject obj = JObject.Parse(TempData.Peek("client").ToString());
+
+            System.Diagnostics.Debug.WriteLine(TempData.Peek("client").ToString());
+            if (obj["group"].ToString() != "Employee")
+                return RedirectToAction("Index", "Home");
+            JArray array = DbUsers.getRequirementsListFromUser((JObject.Parse(TempData.Peek("client").ToString())["email"]).ToString());
+            ViewData["list"] = array;
+            return View("RequirementsList");
         }
     }
 }

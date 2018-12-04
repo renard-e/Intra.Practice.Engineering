@@ -49,7 +49,7 @@ namespace Intra.Practice.Engineering.Controllers
             {
                 JObject obj = JObject.Parse(TempData.Peek("client").ToString());
 
-                obj["group"] = "Employee";
+                obj["group"] = "Manager";
                 obj["email"] = HttpContext.Request.Form["email"].ToString();
                 TempData["client"] = obj.ToString();
                 return RedirectToAction("Index", "Manager");

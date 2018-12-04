@@ -7,6 +7,7 @@
 
 <body class="yui3-skin-sam bodyColor">
     <div class="divSpaceForm">
+        <h1 style="font-family:verdana; color: red" align="center"> @TempData["message"] </h1><br><br>
         <img src="~/images/Intra.jpg" class="center-block">
         <div id="banner" style="overflow: hidden; display: flex; justify-content:space-around;">
             <div id="calendar1" class="yui3-skin-sam yui3-g">
@@ -63,18 +64,18 @@
         <form method="post" action="Employee/PushCalendar" name="formEmployeeCalendar" id="formEmployeeCalendar">
             <div class="form-group">
                 <label for="inputCalendar1" style="color: white">Start</label>
-                <input type="text" class="form-control" id="selecteddatestart" name="selecteddatestart" value="" hidden>
+                <input type="text" class="form-control" id="selecteddatestart" name="selecteddatestart" value="">
             </div>
             <div class="form-group">
                 <label for="imputCalendar2" style="color: white">End</label>
-                <input type="text" class="form-control" id="selecteddateend" name="selecteddateend" value=""hidden>
+                <input type="text" class="form-control" id="selecteddateend" name="selecteddateend" value="">
             </div>
             <div class="form-group">
-                    <label for="imputReason" style="color: white">Reason :</label>
-                    <input type="text" class="form-control" id="reason" name="reason">
+                <label for="imputReason" style="color: white">Reason :</label>
+                <input type="text" class="form-control" id="reason" name="reason">
             </div>
             <br>
             <button type="submit" class="btn btn-warning btn-block" id="submit" name="send">Submit</button>
-          </form>
-        </div>
+        </form>
+    </div>
     </body>

@@ -31,6 +31,15 @@ namespace Intra.Practice.Engineering.Controllers
             return View();
         }
 
+        public IActionResult Logout()
+        {
+            JObject obj = new JObject();
+
+            obj.Add("email", "");
+            obj.Add("group", "undefined");
+            TempData["client"] = obj.ToString();
+            return RedirectToAction("Index", "Home");
+        }
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
