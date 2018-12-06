@@ -43,5 +43,17 @@ namespace Intra.Practice.Engineering.Controllers
             ViewData["list"] = array;
             return View("RequirementsList");
         }
+
+        public IActionResult RemoveItem(String Id)
+        {
+            JObject obj = JObject.Parse(TempData.Peek("client").ToString());
+
+            System.Diagnostics.Debug.WriteLine(TempData.Peek("client").ToString());
+            if (obj["group"].ToString() != "Employee")
+                return RedirectToAction("Index", "Home");
+            if (DbUsers.removeOneItemFromList((JObject.Parse(TempData.Peek("client").ToString())["email"]).ToString(), Id) == false)
+                System.Diagnostics.Debug.WriteLine("Error : can't remove Item");
+            return RedirectToAction("RequirementsList", "Employee");
+        }
     }
 }

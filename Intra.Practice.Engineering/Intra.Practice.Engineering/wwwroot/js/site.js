@@ -17,3 +17,8 @@ function requiredSignIn() {
         return false;
     }
 }
+
+function removeItem(Id)
+{
+    window.location.href = "RemoveItem?Id=" + Id;
+}

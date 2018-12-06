@@ -109,14 +109,15 @@ namespace Intra.Practice.Engineering
                     objFinal = JObject.Parse(sr.ReadToEnd());
                     JArray array = JArray.Parse(objFinal["list"].ToString());
                     JObject newObjList = new JObject();
-
+                  
                     newObjList.Add("Start", dayStart);
                     newObjList.Add("End", dayEnd);
                     newObjList.Add("Reason", Reason);
                     newObjList.Add("State", "In progress");
-                    newObjList.Add("Id", (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds.ToString());
+                    newObjList.Add("Id", (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds.ToString().Split(",")[0]);
+                    newObjList.Add("User", UserEmail);
                     array.Add(newObjList);
-                    objFinal["list"] = array.ToString();
+                    objFinal["list"] = array;
                     sr.Close();
                     try
                     {
@@ -150,7 +151,6 @@ namespace Intra.Practice.Engineering
 
             if (File.Exists(folder + userEmail + dbName + ".json"))
             {
-                JObject objFinal = new JObject();
                 try
                 {
                     StreamReader sr = new StreamReader(folder + userEmail + dbName + ".json");
@@ -166,6 +166,68 @@ namespace Intra.Practice.Engineering
                 }
             }
             return (new JArray());
+        }
+
+        public static Boolean removeOneItemFromList(String userEmail, String Id)
+        {
+            String folder = @"c:\dbIntra/";
+            String dbName = "ListDayOff";
+            JObject objFinal = new JObject();
+            
+            try
+            {
+                StreamReader sr = new StreamReader(folder + userEmail + dbName + ".json");
+                JArray array = JArray.Parse(JObject.Parse(sr.ReadToEnd())["list"].ToString());
+                int idx = 0;
+
+                sr.Close();
+                while (idx != array.Count)
+                {
+                    if (array[idx]["Id"].ToString() == Id)
+                        break;
+                    idx++;
+                }
+                if (idx != array.Count)
+                    array.RemoveAt(idx);
+                else
+                    return (false);
+                objFinal.Add("list", array);
+                try
+                {
+                    StreamWriter srW = new StreamWriter(folder + userEmail + dbName + ".json");
+
+                    srW.Write(objFinal.ToString());
+                    srW.Close();
+                    System.Diagnostics.Debug.WriteLine("SUCCEES : write data in file");
+                    System.Diagnostics.Debug.WriteLine(objFinal.ToString());
+                    return (true);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("--------------------------------\n" + "Error : can't init StreamWriter : " + ex.ToString() + "\n----------------------------------------");
+                    return (false);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error : can't init StreamReader exeception : \n" + ex.ToString());
+                return (false);
+            }
+        }
+
+        public static JArray getAllRequirementsList(String separator)
+        {
+            String folder = @"c:\dbIntra/";
+            JArray globalArray = new JArray();
+
+            var allFilesDb = Directory.EnumerateFiles(folder);
+
+            System.Diagnostics.Debug.WriteLine("START FILE FINDER");
+            foreach (String nameFile in allFilesDb)
+            {
+                System.Diagnostics.Debug.WriteLine("NAME FILE = " + nameFile);
+            }
+            return (globalArray);
         }
     }
 }

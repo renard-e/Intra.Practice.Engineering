@@ -7,21 +7,23 @@
     <div class="divSpaceForm">
         <h1 style="font-family:verdana; color: red" align="center"> @TempData["message"] </h1><br><br>
         <img src="~/images/Intra.jpg" class="center-block">
-        <table style="color:white; border: 1px solid white;">
+        <table class="table">
             <caption style="color:#f0ad4e">Requirements List :</caption>
             <tr>
-                <th style="color:white; border: 1px solid white;">Start :</th>
-                <th style="color:white; border: 1px solid white;">End : </th>
-                <th style="color:white; border: 1px solid white;"> Reason :</th>
-                <th style="color:white; border: 1px solid white;"> State :</th>
+                <th style="color:white;">Start :</th>
+                <th style="color:white;">End : </th>
+                <th style="color:white;"> Reason :</th>
+                <th style="color:white;"> State :</th>
+                <th style="color:white;"></th>
             </tr>
             @foreach (var item in ViewData["list"] as Newtonsoft.Json.Linq.JArray)
     {
             <tr>
-                <td style="color:white; border: 1px solid white;">@item["Start"]</td>
-                <td style="color:white; border: 1px solid white;">@item["End"]</td>
-                <td style="color:white; border: 1px solid white;">@item["Reason"]</td>
-                <td style="color:white; border: 1px solid white;">@item["State"]</td>
+                <td style="color:white;">@item["Start"]</td>
+                <td style="color:white;">@item["End"]</td>
+                <td style="color:white;">@item["Reason"]</td>
+                <td style="color:white;">@item["State"]</td>
+                <td><button class="btn btn-warning btn-block" onclick="removeItem(@item["Id"])">Remove</button></td>
             </tr>
 }
         </table>

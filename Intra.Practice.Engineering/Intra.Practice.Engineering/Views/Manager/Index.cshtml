@@ -3,5 +3,33 @@
     ViewData["Title"] = "Manager";
 }
 
-<h2>Index @ViewData["Title"]</h2>
+<body class="bodyColor">
+    <div class="divSpaceForm">
+        <h1 style="font-family:verdana; color: red" align="center"> @TempData["message"] </h1><br><br>
+        <img src="~/images/Intra.jpg" class="center-block">
+        <table class="table">
+            <caption style="color:#f0ad4e">Requirements List Of All Users :</caption>
+            <tr>
+                <th style="color:white;">User :</th>
+                <th style="color:white;">Start :</th>
+                <th style="color:white;">End : </th>
+                <th style="color:white;"> Reason :</th>
+                <th style="color:white;"> State :</th>
+                <th style="color:white;"></th>
+            </tr>
+            @foreach (var item in ViewData["list"] as Newtonsoft.Json.Linq.JArray)
+            {
+            <tr>
+                <td style="color:white;">@item["User"]</td>
+                <td style="color:white;">@item["Start"]</td>
+                <td style="color:white;">@item["End"]</td>
+                <td style="color:white;">@item["Reason"]</td>
+                <td style="color:white;">@item["State"]</td>
+                <td></td>
+            </tr>
+            }
+        </table>
+    </div>
+</body>
+
 
