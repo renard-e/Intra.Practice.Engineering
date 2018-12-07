@@ -13,21 +13,22 @@
                 <th style="color:white;">User :</th>
                 <th style="color:white;">Start :</th>
                 <th style="color:white;">End : </th>
-                <th style="color:white;"> Reason :</th>
-                <th style="color:white;"> State :</th>
+                <th style="color:white;">Reason :</th>
                 <th style="color:white;"></th>
             </tr>
             @foreach (var item in ViewData["list"] as Newtonsoft.Json.Linq.JArray)
             {
+                @if (item["state"].ToString() == "0")
+                {
             <tr>
-                <td style="color:white;">@item["User"]</td>
-                <td style="color:white;">@item["Start"]</td>
-                <td style="color:white;">@item["End"]</td>
-                <td style="color:white;">@item["Reason"]</td>
-                <td style="color:white;">@item["State"]</td>
-                <td></td>
+                <td style="color:white;">@item["userEmailIntra"]</td>
+                <td style="color:white;">@item["start"]</td>
+                <td style="color:white;">@item["end"]</td>
+                <td style="color:white;">@item["reason"]</td>
+                <td><button class="btn btn-danger btn-block" onclick="changeState(@item["userEmailIntra"], @item["id"], -1)">Refuse</button><button class="btn btn-warning btn-block" onclick="changeState(@item["userEmailIntra"], @item["id"], 1)">Accept</button></td>
             </tr>
-            }
+                    }
+                }
         </table>
     </div>
 </body>

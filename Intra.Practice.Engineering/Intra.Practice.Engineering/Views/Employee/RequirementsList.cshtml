@@ -12,18 +12,29 @@
             <tr>
                 <th style="color:white;">Start :</th>
                 <th style="color:white;">End : </th>
-                <th style="color:white;"> Reason :</th>
-                <th style="color:white;"> State :</th>
+                <th style="color:white;">Reason :</th>
+                <th style="color:white;">State :</th>
                 <th style="color:white;"></th>
             </tr>
             @foreach (var item in ViewData["list"] as Newtonsoft.Json.Linq.JArray)
     {
             <tr>
-                <td style="color:white;">@item["Start"]</td>
-                <td style="color:white;">@item["End"]</td>
-                <td style="color:white;">@item["Reason"]</td>
-                <td style="color:white;">@item["State"]</td>
-                <td><button class="btn btn-warning btn-block" onclick="removeItem(@item["Id"])">Remove</button></td>
+                <td style="color:white;">@item["start"]</td>
+                <td style="color:white;">@item["end"]</td>
+                <td style="color:white;">@item["reason"]</td>
+                @if (item["state"].ToString() == "0")
+    {
+            <td style="color:white;">In Progress</td>
+}
+                @if (item["state"].ToString() == "-1")
+    {
+            <td style="color:white;">Refused by the admin</td>
+}
+                @if (item["state"].ToString() == "1")
+    {
+            <td style="color:white;">Accepted by the admin</td>
+}
+                <td><button class="btn btn-danger btn-block" onclick="removeItem(@item["id"])">Remove</button></td>
             </tr>
 }
         </table>

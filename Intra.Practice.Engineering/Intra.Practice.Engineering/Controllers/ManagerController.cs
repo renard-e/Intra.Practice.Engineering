@@ -17,9 +17,23 @@ namespace Intra.Practice.Engineering.Controllers
             System.Diagnostics.Debug.WriteLine(TempData.Peek("client").ToString());
             if (obj["group"].ToString() != "Manager")
                 return RedirectToAction("Index", "Home");
-            JArray array = DbUsers.getAllRequirementsList("ListDayOff.json");
+            JArray array = DbUsers.getAllRequirementsList();
             ViewData["list"] = array;
             return View();
+        }
+
+        public IActionResult changeStateRequest(String user, String id, String newState)
+        {
+            JObject obj = JObject.Parse(TempData.Peek("client").ToString());
+
+            System.Diagnostics.Debug.WriteLine(TempData.Peek("client").ToString());
+            if (obj["group"].ToString() != "Manager")
+                return RedirectToAction("Index", "Home");
+
+            System.Diagnostics.Debug.WriteLine("USER = " + user);
+            System.Diagnostics.Debug.WriteLine("ID = " + id);
+            System.Diagnostics.Debug.WriteLine("newState = " + newState);
+            return RedirectToAction("Index", "Manager");
         }
     }
 }

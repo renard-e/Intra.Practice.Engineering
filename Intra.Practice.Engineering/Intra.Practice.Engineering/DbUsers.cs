@@ -110,12 +110,12 @@ namespace Intra.Practice.Engineering
                     JArray array = JArray.Parse(objFinal["list"].ToString());
                     JObject newObjList = new JObject();
                   
-                    newObjList.Add("Start", dayStart);
-                    newObjList.Add("End", dayEnd);
-                    newObjList.Add("Reason", Reason);
-                    newObjList.Add("State", "In progress");
-                    newObjList.Add("Id", (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds.ToString().Split(",")[0]);
-                    newObjList.Add("User", UserEmail);
+                    newObjList.Add("start", dayStart);
+                    newObjList.Add("end", dayEnd);
+                    newObjList.Add("reason", Reason);
+                    newObjList.Add("state", "0");
+                    newObjList.Add("userEmailIntra", UserEmail);
+                    newObjList.Add("id", (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds.ToString().Split(",")[0]);
                     array.Add(newObjList);
                     objFinal["list"] = array;
                     sr.Close();
@@ -144,16 +144,32 @@ namespace Intra.Practice.Engineering
             return (false);
         }
 
-        public static JArray getRequirementsListFromUser(String userEmail)
+        public static JArray getRequirementsListFromUser(String userInfo)
         {
             String folder = @"c:\dbIntra/";
             String dbName = "ListDayOff";
 
-            if (File.Exists(folder + userEmail + dbName + ".json"))
+            if (File.Exists(folder + userInfo + dbName + ".json"))
             {
                 try
                 {
-                    StreamReader sr = new StreamReader(folder + userEmail + dbName + ".json");
+                    StreamReader sr = new StreamReader(folder + userInfo + dbName + ".json");
+                    JArray array = JArray.Parse(JObject.Parse(sr.ReadToEnd())["list"].ToString());
+
+                    sr.Close();
+                    return (array);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Error : can't init StreamReader exeception : \n" + ex.ToString());
+                    return (new JArray());
+                }
+            }
+            else if (File.Exists(userInfo + dbName + ".json"))
+            {
+                try
+                {
+                    StreamReader sr = new StreamReader(userInfo + dbName + ".json");
                     JArray array = JArray.Parse(JObject.Parse(sr.ReadToEnd())["list"].ToString());
 
                     sr.Close();
@@ -183,7 +199,7 @@ namespace Intra.Practice.Engineering
                 sr.Close();
                 while (idx != array.Count)
                 {
-                    if (array[idx]["Id"].ToString() == Id)
+                    if (array[idx]["id"].ToString() == Id)
                         break;
                     idx++;
                 }
@@ -215,17 +231,25 @@ namespace Intra.Practice.Engineering
             }
         }
 
-        public static JArray getAllRequirementsList(String separator)
+        public static JArray getAllRequirementsList()
         {
             String folder = @"c:\dbIntra/";
+            String separator = "ListDayOff.json";
             JArray globalArray = new JArray();
 
-            var allFilesDb = Directory.EnumerateFiles(folder);
+            var allFilesDb = Directory.EnumerateFiles(folder, "*" + separator);
 
-            System.Diagnostics.Debug.WriteLine("START FILE FINDER");
             foreach (String nameFile in allFilesDb)
             {
-                System.Diagnostics.Debug.WriteLine("NAME FILE = " + nameFile);
+                JArray tmpArray = getRequirementsListFromUser(nameFile.Split(separator)[0]);
+                int idx = 0;
+
+                while (idx != tmpArray.Count)
+                {
+                    if (tmpArray[idx]["state"].ToString() == "0")
+                        globalArray.Add(tmpArray[idx]);
+                    idx++;
+                }
             }
             return (globalArray);
         }

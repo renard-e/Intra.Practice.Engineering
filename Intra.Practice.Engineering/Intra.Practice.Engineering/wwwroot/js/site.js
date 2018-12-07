@@ -22,3 +22,8 @@ function removeItem(Id)
 {
     window.location.href = "RemoveItem?Id=" + Id;
 }
+
+function changeState(user, id, state)
+{
+    window.location.href = "Manager/changeStateRequest?user=" + user + "&id=" + id + "&newState=" + state;
+}
