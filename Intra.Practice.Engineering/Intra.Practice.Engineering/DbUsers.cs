@@ -187,12 +187,12 @@ namespace Intra.Practice.Engineering
         public static Boolean removeOneItemFromList(String userEmail, String Id)
         {
             String folder = @"c:\dbIntra/";
-            String dbName = "ListDayOff";
+            String dbName = "ListDayOff.json";
             JObject objFinal = new JObject();
             
             try
             {
-                StreamReader sr = new StreamReader(folder + userEmail + dbName + ".json");
+                StreamReader sr = new StreamReader(folder + userEmail + dbName);
                 JArray array = JArray.Parse(JObject.Parse(sr.ReadToEnd())["list"].ToString());
                 int idx = 0;
 
@@ -210,7 +210,7 @@ namespace Intra.Practice.Engineering
                 objFinal.Add("list", array);
                 try
                 {
-                    StreamWriter srW = new StreamWriter(folder + userEmail + dbName + ".json");
+                    StreamWriter srW = new StreamWriter(folder + userEmail + dbName);
 
                     srW.Write(objFinal.ToString());
                     srW.Close();
@@ -252,6 +252,54 @@ namespace Intra.Practice.Engineering
                 }
             }
             return (globalArray);
+        }
+
+        public static Boolean changeStateOneRequest(String userEmail, String idRequest, String newState)
+        {
+            String folder = @"c:\dbIntra/";
+            String dbName = "ListDayOff.json";
+
+            JObject objFinal = new JObject();
+
+            try
+            {
+                StreamReader sr = new StreamReader(folder + userEmail + dbName);
+                JArray array = JArray.Parse(JObject.Parse(sr.ReadToEnd())["list"].ToString());
+                int idx = 0;
+
+                sr.Close();
+                while (idx != array.Count)
+                {
+                    if (array[idx]["id"].ToString() == idRequest)
+                        break;
+                    idx++;
+                }
+                if (idx != array.Count)
+                    array[idx]["state"] = newState;
+                else
+                    return (false);
+                objFinal.Add("list", array);
+                try
+                {
+                    StreamWriter srW = new StreamWriter(folder + userEmail + dbName);
+
+                    srW.Write(objFinal.ToString());
+                    srW.Close();
+                    System.Diagnostics.Debug.WriteLine("SUCCEES : write data in file");
+                    System.Diagnostics.Debug.WriteLine(objFinal.ToString());
+                    return (true);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("--------------------------------\n" + "Error : can't init StreamWriter : " + ex.ToString() + "\n----------------------------------------");
+                    return (false);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error : can't init StreamReader exeception : \n" + ex.ToString());
+                return (false);
+            }
         }
     }
 }

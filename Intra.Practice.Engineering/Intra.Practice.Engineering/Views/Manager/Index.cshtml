@@ -25,7 +25,21 @@
                 <td style="color:white;">@item["start"]</td>
                 <td style="color:white;">@item["end"]</td>
                 <td style="color:white;">@item["reason"]</td>
-                <td><button class="btn btn-danger btn-block" onclick="changeState(@item["userEmailIntra"], @item["id"], -1)">Refuse</button><button class="btn btn-warning btn-block" onclick="changeState(@item["userEmailIntra"], @item["id"], 1)">Accept</button></td>
+                <td>
+                    <form method="post" action="Manager/changeStateRequest" name="formRefuse" id="formRefuse">
+                        <input hidden value="@item["userEmailIntra"]" id="emailUser" name="emailUser">
+                        <input hidden value="@item["id"]" id="idRequest" name="idRequest">
+                        <input hidden value="-1" id="newState" name="newState">
+                        <button class="btn btn-danger btn-block" type="submit" name="sendRefuse" id="sendRefuse">Refuse</button>
+                    </form>
+                    <br>
+                    <form method="post" action="Manager/changeStateRequest" name="formAccept" id="formAccept">
+                        <input hidden value="@item["userEmailIntra"]" id="emailUser" name="emailUser">
+                        <input hidden value="@item["id"]" id="idRequest" name="idRequest">
+                        <input hidden value="1" id="newState" name="newState">
+                        <button class="btn btn-warning btn-block" type="submit" name="sendAccept" id="sendAccept">Accept</button>
+                    </form>
+                </td>
             </tr>
                     }
                 }

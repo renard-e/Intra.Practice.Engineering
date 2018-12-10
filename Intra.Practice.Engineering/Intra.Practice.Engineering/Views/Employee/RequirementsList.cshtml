@@ -34,7 +34,14 @@
     {
             <td style="color:white;">Accepted by the admin</td>
 }
-                <td><button class="btn btn-danger btn-block" onclick="removeItem(@item["id"])">Remove</button></td>
+                @if (item["state"].ToString() == "0")
+                {
+                    <td><button class="btn btn-danger btn-block" onclick="removeItem(@item["id"])">Remove</button></td>
+                }
+                @if (item["state"].ToString() != "0")
+                {
+                    <td></td>
+                }
             </tr>
 }
         </table>
