@@ -5,12 +5,22 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Intra.Practice.Engineering.Data;
+using Microsoft.EntityFrameworkCore;
+using Intra.Practice.Engineering.Models;
 
 namespace Intra.Practice.Engineering.Controllers
 {
     public class SignInController : Controller
     {
-        public IActionResult Index()
+        private readonly IntraContext _context;
+
+        public SignInController(IntraContext context)
+        {
+            _context = context;
+        }
+
+        public  IActionResult Index()
         {
             JObject obj = JObject.Parse(TempData.Peek("client").ToString());
 
@@ -30,7 +40,7 @@ namespace Intra.Practice.Engineering.Controllers
                 TempData["message"] = "Please fill all the blanks";
                 return RedirectToAction("Index", "SignIn");
             }
-            String group = DbUsers.SignInFunc(HttpContext.Request.Form["email"].ToString(), HttpContext.Request.Form["passwd"].ToString());
+            String group = DbUsers.SignInFunc(HttpContext.Request.Form["email"].ToString(), HttpContext.Request.Form["passwd"].ToString(), _context);
             if (group == "undefined")
             {
                 TempData["message"] = "Bad User name or Password";

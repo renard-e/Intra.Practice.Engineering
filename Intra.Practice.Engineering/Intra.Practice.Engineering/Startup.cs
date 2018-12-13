@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Intra.Practice.Engineering.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Intra.Practice.Engineering
 {
@@ -21,6 +23,7 @@ namespace Intra.Practice.Engineering
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<IntraContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMemoryCache();
             services.AddSession();
             services.AddMvc();

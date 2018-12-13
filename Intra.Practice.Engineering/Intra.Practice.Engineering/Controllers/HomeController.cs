@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Intra.Practice.Engineering.Models;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Intra.Practice.Engineering.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Intra.Practice.Engineering.Controllers
 {
